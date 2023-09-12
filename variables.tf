@@ -1,4 +1,24 @@
-# From https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/variables.tf
+################################################################################
+# Project
+################################################################################
+
+variable "project_id" {
+  description = "Project ID in which clusters are deployed"
+  type        = string
+}
+variable "region" {
+  description = "Region to deploy your cluster in"
+  type        = string
+}
+variable "cluster_name" {
+  description = "Name of the cluster"
+  type        = string
+}
+# variable "tags" {
+#   description = "A map of tags to add to all resources"
+#   type        = map(string)
+#   default     = {}
+# }
 
 ################################################################################
 # Network
@@ -8,51 +28,48 @@ variable "shim" {
   type        = bool
   default     = false
 }
-### Shim
 
+################################################################################
+# Network SHIM
+################################################################################
 variable "network_name" {
   description = "SHIM: network name"
   type        = string
 }
-variable "subnetwork_id" {
+variable "subnet_id" {
   description = "SHIM: Subnetwork ID"
   type        = string
 }
 
-### Non shim
+################################################################################
+# Network NON-SHIM
+################################################################################
 
-
-variable "cluster_name" {
-  description = "Name of the cluster"
+variable "routing_mode" {
+  description = "Routing mode for the network"
+  type        = string
+  default     = "GLOBAL"
+}
+variable "private_subnet_cidr" {
+  description = "CIDR range for private subnet"
   type        = string
 }
-
 variable "network_vpc_secondary_ranges" {
   description = "List of secondary ranges"
-  type        = list(any)
+  type = list(object({
+    range_name    = string
+    ip_cidr_range = string
+  }))
 }
 
-variable "network_vpc_cidr" {
-  description = "VPC CIDR"
+variable "enable_private_access" {
+  description = "Private access for subnets"
+  type        = bool
+  default     = true
 }
 
-################################################################################
-# Generic
-################################################################################
-
-
-variable "tags" {
-  description = "A map of tags to add to all resources"
-  type        = map(string)
-  default     = {}
-}
-
-variable "region" {
-  description = "region"
-  type        = string
-}
-
-variable "project" {
-  description = "GCP Project"
-  type        = string
+variable "enable_flow_logs" {
+  description = "Enable flow logs for subnets"
+  type        = bool
+  default     = false
 }
