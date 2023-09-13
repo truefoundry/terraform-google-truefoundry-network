@@ -1,58 +1,107 @@
-resource "google_compute_network" "this" {
-  count                   = var.shim == true ? 0 : 1
-  name                    = "${var.cluster_name}-vpc"
-  auto_create_subnetworks = "false"
-  routing_mode            = "GLOBAL"
+# Create a VPC network
+data "google_compute_network" "gcn" {
+  count = var.shim ? 1 : 0
+  name  = var.network_name
 }
 
-resource "google_compute_subnetwork" "cluster" {
-  count         = var.shim == true ? 0 : 1
-  name          = "${var.cluster_name}-vpc"
-  ip_cidr_range = var.network_vpc_cidr
-  network       = google_compute_network.this[0].id
-  region        = var.region
+module "network" {
+  count                   = var.shim ? 0 : 1
+  source                  = "terraform-google-modules/network/google"
+  version                 = "7.3.0"
+  description             = "Truefoundry network for ${var.cluster_name}"
+  project_id              = var.project_id
+  network_name            = local.network_name
+  routing_mode            = var.routing_mode
+  auto_create_subnetworks = false
 
-  secondary_ip_range = var.network_vpc_secondary_ranges
-
-  private_ip_google_access = true
-}
-
-resource "google_compute_address" "cluster" {
-  count  = var.shim == true ? 0 : 1
-  name   = "${var.cluster_name}-address"
-  region = var.region
-}
-
-resource "google_compute_router" "cluster" {
-  count   = var.shim == true ? 0 : 1
-  name    = "${var.cluster_name}-router"
-  network = google_compute_network.this[0].id
-}
-
-resource "google_compute_router_nat" "cluster" {
-  count                              = var.shim == true ? 0 : 1
-  router                             = google_compute_router.cluster[0].name
-  name                               = "${var.cluster_name}-nat"
-  nat_ip_allocate_option             = "MANUAL_ONLY"
-  nat_ips                            = [google_compute_address.cluster[0].self_link]
-  source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
-  subnetwork {
-    name                    = google_compute_subnetwork.cluster[0].id
-    source_ip_ranges_to_nat = ["ALL_IP_RANGES"]
+  subnets = [
+    {
+      subnet_name           = local.private_subnet_name
+      subnet_ip             = var.private_subnet_cidr
+      subnet_region         = var.region
+      subnet_private_access = var.enable_private_access
+      subnet_flow_logs      = var.enable_flow_logs
+    }
+  ]
+  secondary_ranges = {
+    # has to be passed in interpolation otherwise it give error
+    "${local.private_subnet_name}" = var.network_vpc_secondary_ranges
   }
-  depends_on = [google_compute_address.cluster[0]]
+  ingress_rules = [
+    {
+      name          = "ingress-allow-http-https"
+      description   = "Allow port 80 and 443"
+      source_ranges = ["0.0.0.0/0"]
+      allow = [
+        {
+          protocol = "tcp"
+          ports    = ["80", "443"]
+        }
+      ]
+    },
+    {
+      name          = "ingress-allow-internal"
+      description   = "Allow all ports inside a subnet"
+      source_ranges = [var.private_subnet_cidr]
+      allow = [
+        {
+          protocol = "tcp"
+        }
+      ]
+    }
+  ]
+  egress_rules = [
+    {
+      name               = "egress-allow-all"
+      description        = "Allow egress"
+      source_ranges      = ["0.0.0.0/0"]
+      destination_ranges = ["0.0.0.0/0"]
+      allow = [
+        {
+          protocol = "tcp"
+        },
+        {
+          protocol = "udp"
+        }
+      ]
+    },
+  ]
+  routes = [
+    {
+      name              = "egress-internet"
+      description       = "Route through IGW to access internet"
+      destination_range = "0.0.0.0/0"
+      tags              = "egress-inet"
+      next_hop_internet = "true"
+    },
+  ]
+  shared_vpc_host = false
 }
 
-resource "google_compute_firewall" "cluster_allow_all" {
-  count   = var.shim == true ? 0 : 1
-  name    = "${var.cluster_name}-cluster-allow-all"
-  network = google_compute_network.this[0].name
-
-  allow {
-    protocol = "tcp"
-  }
-
-  priority = 1000
-
-  source_ranges = ["0.0.0.0/0"]
+module "cloud_router" {
+  count       = var.shim ? 0 : 1
+  source      = "terraform-google-modules/cloud-router/google"
+  version     = "6.0.1"
+  description = "Truefoundry NAT router for ${var.cluster_name}"
+  name        = local.router_name
+  project     = var.project_id
+  region      = var.region
+  network     = module.network[0].network_name
+  nats = [
+    {
+      name                               = local.nat_name
+      nat_ip_allocate_option             = "AUTO_ONLY"
+      source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
+      subnetworks = [
+        {
+          name                    = local.private_subnet_name
+          source_ip_ranges_to_nat = ["ALL_IP_RANGES"]
+        }
+      ]
+      log_config = {
+        enabled = true
+        filter  = "ERRORS_ONLY"
+      }
+    }
+  ]
 }

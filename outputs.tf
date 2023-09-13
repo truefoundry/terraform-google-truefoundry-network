@@ -1,7 +1,11 @@
 output "network_name" {
-  value = var.shim == true ? var.network_name : google_compute_network.this[0].name
+  value = var.shim ? var.network_name : module.network[0].network_name
 }
 
-output "subnetwork_id" {
-  value = var.shim == true ? var.subnetwork_id : google_compute_subnetwork.cluster[0].id
+output "network_id" {
+  value = var.shim ? data.google_compute_network.gcn[0].id : module.network[0].network_id
 }
+
+output "subnet_id" {
+  value = var.shim ? var.subnet_id : module.network[0].subnets_ids[0]
+} 
