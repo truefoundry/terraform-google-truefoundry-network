@@ -14,6 +14,7 @@ Truefoundry Google Cloud Network Module
 | Name | Version |
 |------|---------|
 | <a name="provider_google"></a> [google](#provider\_google) | 4.81.0 |
+| <a name="provider_time"></a> [time](#provider\_time) | n/a |
 
 ## Modules
 
@@ -26,6 +27,7 @@ Truefoundry Google Cloud Network Module
 
 | Name | Type |
 |------|------|
+| [time_sleep.wait_2_mins](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 | [google_compute_network.gcn](https://registry.terraform.io/providers/hashicorp/google/4.81.0/docs/data-sources/compute_network) | data source |
 
 ## Inputs
