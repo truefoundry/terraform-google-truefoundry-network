@@ -79,7 +79,7 @@ module "network" {
 }
 
 resource "time_sleep" "wait_2_mins" {
-  count = var.shim ? 0 : 1
+  count      = var.shim ? 0 : 1
   depends_on = [module.network[0]]
 
   create_duration = "2m"
@@ -110,5 +110,5 @@ module "cloud_router" {
       }
     }
   ]
-  depends_on = [ time_sleep.wait_2_mins ]
+  depends_on = [time_sleep.wait_2_mins]
 }
