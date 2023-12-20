@@ -29,7 +29,7 @@ module "network" {
   }
   ingress_rules = [
     {
-      name          = "ingress-allow-http-https"
+      name          = "${local.network_name}-ingress-allow-http-https"
       description   = "Allow port 80 and 443"
       source_ranges = ["0.0.0.0/0"]
       allow = [
@@ -40,7 +40,7 @@ module "network" {
       ]
     },
     {
-      name          = "ingress-allow-internal"
+      name          = "${local.network_name}-ingress-allow-internal"
       description   = "Allow all ports inside a subnet"
       source_ranges = [var.private_subnet_cidr]
       allow = [
@@ -52,7 +52,7 @@ module "network" {
   ]
   egress_rules = [
     {
-      name               = "egress-allow-all"
+      name               = "${local.network_name}-egress-allow-all"
       description        = "Allow egress"
       source_ranges      = ["0.0.0.0/0"]
       destination_ranges = ["0.0.0.0/0"]
@@ -68,7 +68,7 @@ module "network" {
   ]
   routes = [
     {
-      name              = "egress-internet"
+      name              = "${local.network_name}-egress-internet"
       description       = "Route through IGW to access internet"
       destination_range = "0.0.0.0/0"
       tags              = "egress-inet"
