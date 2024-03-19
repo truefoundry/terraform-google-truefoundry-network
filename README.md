@@ -13,7 +13,6 @@ Truefoundry Google Cloud Network Module
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | 4.81.0 |
 | <a name="provider_time"></a> [time](#provider\_time) | n/a |
 
 ## Modules
@@ -28,7 +27,6 @@ Truefoundry Google Cloud Network Module
 | Name | Type |
 |------|------|
 | [time_sleep.wait_2_mins](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
-| [google_compute_network.gcn](https://registry.terraform.io/providers/hashicorp/google/4.81.0/docs/data-sources/compute_network) | data source |
 
 ## Inputs
 
@@ -43,6 +41,10 @@ Truefoundry Google Cloud Network Module
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Project ID in which clusters are deployed | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Region to deploy your cluster in | `string` | n/a | yes |
 | <a name="input_routing_mode"></a> [routing\_mode](#input\_routing\_mode) | Routing mode for the network | `string` | `"GLOBAL"` | no |
+| <a name="input_shared_vpc"></a> [shared\_vpc](#input\_shared\_vpc) | If true, the shim network is a shared VPC | `bool` | `false` | no |
+| <a name="input_shared_vpc_host_project"></a> [shared\_vpc\_host\_project](#input\_shared\_vpc\_host\_project) | Shared VPC: Project ID of the host project | `string` | `""` | no |
+| <a name="input_shared_vpc_network_name"></a> [shared\_vpc\_network\_name](#input\_shared\_vpc\_network\_name) | Shared VPC: Network name | `string` | `""` | no |
+| <a name="input_shared_vpc_subnet_name"></a> [shared\_vpc\_subnet\_name](#input\_shared\_vpc\_subnet\_name) | Shared VPC: Subnet name | `string` | `""` | no |
 | <a name="input_shim"></a> [shim](#input\_shim) | If true will not create the network and forward the input values to the same outputs. | `bool` | `false` | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | SHIM: Subnetwork ID | `string` | n/a | yes |
 
@@ -50,7 +52,8 @@ Truefoundry Google Cloud Network Module
 
 | Name | Description |
 |------|-------------|
-| <a name="output_network_id"></a> [network\_id](#output\_network\_id) | n/a |
-| <a name="output_network_name"></a> [network\_name](#output\_network\_name) | n/a |
-| <a name="output_subnet_id"></a> [subnet\_id](#output\_subnet\_id) | n/a |
+| <a name="output_additional_secondary_ranges"></a> [additional\_secondary\_ranges](#output\_additional\_secondary\_ranges) | Additional secondary ranges applied to the subnet |
+| <a name="output_network_id"></a> [network\_id](#output\_network\_id) | ID of the network |
+| <a name="output_network_name"></a> [network\_name](#output\_network\_name) | Name of the network |
+| <a name="output_subnet_id"></a> [subnet\_id](#output\_subnet\_id) | ID of the subnet |
 <!-- END_TF_DOCS -->
