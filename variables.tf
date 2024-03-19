@@ -29,6 +29,12 @@ variable "shim" {
   default     = false
 }
 
+variable "shared_vpc" {
+  description = "If true, the shim network is a shared VPC"
+  type        = bool
+  default     = false
+}
+
 ################################################################################
 # Network SHIM
 ################################################################################
@@ -41,6 +47,27 @@ variable "subnet_id" {
   type        = string
 }
 
+################################################################################
+# Shared VPC
+################################################################################
+
+variable "shared_vpc_host_project" {
+  description = "Shared VPC: Project ID of the host project"
+  type        = string
+  default     = ""
+}
+
+variable "shared_vpc_network_name" {
+  description = "Shared VPC: Network name"
+  type        = string
+  default     = ""
+}
+
+variable "shared_vpc_subnet_name" {
+  description = "Shared VPC: Subnet name"
+  type        = string
+  default     = ""
+}
 ################################################################################
 # Network NON-SHIM
 ################################################################################

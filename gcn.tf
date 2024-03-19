@@ -1,11 +1,7 @@
-# Create a VPC network
-data "google_compute_network" "gcn" {
-  count = var.shim ? 1 : 0
-  name  = var.network_name
-}
+# # Create a VPC network
 
 module "network" {
-  count                   = var.shim ? 0 : 1
+  count                   = var.shim || var.shared_vpc ? 0 : 1
   source                  = "terraform-google-modules/network/google"
   version                 = "7.3.0"
   description             = "Truefoundry network for ${var.cluster_name}"
@@ -79,13 +75,13 @@ module "network" {
 }
 
 resource "time_sleep" "wait_2_mins" {
-  count      = var.shim ? 0 : 1
+  count      = var.shim || var.shared_vpc ? 0 : 1
   depends_on = [module.network[0]]
 
   create_duration = "2m"
 }
 module "cloud_router" {
-  count       = var.shim ? 0 : 1
+  count       = var.shim || var.shared_vpc ? 0 : 1
   source      = "terraform-google-modules/cloud-router/google"
   version     = "6.0.1"
   description = "Truefoundry NAT router for ${var.cluster_name}"
