@@ -8,12 +8,13 @@ Truefoundry Google Cloud Network Module
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.4 |
 | <a name="requirement_google"></a> [google](#requirement\_google) | 4.81.0 |
+| <a name="requirement_time"></a> [time](#requirement\_time) | 0.12.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_time"></a> [time](#provider\_time) | n/a |
+| <a name="provider_time"></a> [time](#provider\_time) | 0.12.1 |
 
 ## Modules
 
@@ -26,7 +27,7 @@ Truefoundry Google Cloud Network Module
 
 | Name | Type |
 |------|------|
-| [time_sleep.wait_2_mins](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
+| [time_sleep.wait_2_mins](https://registry.terraform.io/providers/hashicorp/time/0.12.1/docs/resources/sleep) | resource |
 
 ## Inputs
 
@@ -36,7 +37,7 @@ Truefoundry Google Cloud Network Module
 | <a name="input_enable_flow_logs"></a> [enable\_flow\_logs](#input\_enable\_flow\_logs) | Enable flow logs for subnets | `bool` | `false` | no |
 | <a name="input_enable_private_access"></a> [enable\_private\_access](#input\_enable\_private\_access) | Private access for subnets | `bool` | `true` | no |
 | <a name="input_network_name"></a> [network\_name](#input\_network\_name) | SHIM: network name | `string` | n/a | yes |
-| <a name="input_network_vpc_secondary_ranges"></a> [network\_vpc\_secondary\_ranges](#input\_network\_vpc\_secondary\_ranges) | List of secondary ranges | <pre>list(object({<br>    range_name    = string<br>    ip_cidr_range = string<br>  }))</pre> | n/a | yes |
+| <a name="input_network_vpc_secondary_ranges"></a> [network\_vpc\_secondary\_ranges](#input\_network\_vpc\_secondary\_ranges) | List of secondary ranges | <pre>list(object({<br/>    range_name    = string<br/>    ip_cidr_range = string<br/>  }))</pre> | n/a | yes |
 | <a name="input_private_subnet_cidr"></a> [private\_subnet\_cidr](#input\_private\_subnet\_cidr) | CIDR range for private subnet | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Project ID in which clusters are deployed | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Region to deploy your cluster in | `string` | n/a | yes |
