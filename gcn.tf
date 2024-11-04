@@ -21,6 +21,7 @@ module "network" {
   ]
   secondary_ranges = {
     # has to be passed in interpolation otherwise it give error
+    # tflint-ignore: terraform_deprecated_interpolation
     "${local.private_subnet_name}" = var.network_vpc_secondary_ranges
   }
   ingress_rules = [
