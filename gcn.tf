@@ -3,7 +3,7 @@
 module "network" {
   count                   = var.shim || var.shared_vpc ? 0 : 1
   source                  = "terraform-google-modules/network/google"
-  version                 = "7.3.0"
+  version                 = "9.3.0"
   description             = "Truefoundry network for ${var.cluster_name}"
   project_id              = var.project_id
   network_name            = local.network_name
@@ -84,7 +84,7 @@ resource "time_sleep" "wait_2_mins" {
 module "cloud_router" {
   count       = var.shim || var.shared_vpc ? 0 : 1
   source      = "terraform-google-modules/cloud-router/google"
-  version     = "6.0.1"
+  version     = "6.2.0"
   description = "Truefoundry NAT router for ${var.cluster_name}"
   name        = local.router_name
   project     = var.project_id
