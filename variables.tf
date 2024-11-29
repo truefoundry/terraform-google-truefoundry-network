@@ -39,12 +39,15 @@ variable "shared_vpc" {
 # Network SHIM
 ################################################################################
 variable "network_name" {
-  description = "SHIM: network name"
+  description = "SHIM: network name. Should be supplied if shim is true."
   type        = string
+  default     = ""
 }
+
 variable "subnet_id" {
-  description = "SHIM: Subnetwork ID"
+  description = "SHIM: Subnetwork ID. Should be supplied if shim is true."
   type        = string
+  default     = ""
 }
 
 ################################################################################
@@ -52,19 +55,19 @@ variable "subnet_id" {
 ################################################################################
 
 variable "shared_vpc_host_project" {
-  description = "Shared VPC: Project ID of the host project"
+  description = "Shared VPC: Project ID of the host project. Should be supplied if shared_vpc is true."
   type        = string
   default     = ""
 }
 
 variable "shared_vpc_network_name" {
-  description = "Shared VPC: Network name"
+  description = "Shared VPC: Network name. Should be supplied if shared_vpc is true."
   type        = string
   default     = ""
 }
 
 variable "shared_vpc_subnet_name" {
-  description = "Shared VPC: Subnet name"
+  description = "Shared VPC: Subnet name. Should be supplied if shared_vpc is true."
   type        = string
   default     = ""
 }
