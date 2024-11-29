@@ -91,6 +91,7 @@ variable "network_vpc_secondary_ranges" {
     range_name    = string
     ip_cidr_range = string
   }))
+  default = []
 }
 
 variable "enable_private_access" {
