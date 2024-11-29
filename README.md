@@ -36,18 +36,18 @@ Truefoundry Google Cloud Network Module
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the cluster | `string` | n/a | yes |
 | <a name="input_enable_flow_logs"></a> [enable\_flow\_logs](#input\_enable\_flow\_logs) | Enable flow logs for subnets | `bool` | `false` | no |
 | <a name="input_enable_private_access"></a> [enable\_private\_access](#input\_enable\_private\_access) | Private access for subnets | `bool` | `true` | no |
-| <a name="input_network_name"></a> [network\_name](#input\_network\_name) | SHIM: network name | `string` | n/a | yes |
+| <a name="input_network_name"></a> [network\_name](#input\_network\_name) | SHIM: network name. Should be supplied if shim is true. | `string` | `""` | no |
 | <a name="input_network_vpc_secondary_ranges"></a> [network\_vpc\_secondary\_ranges](#input\_network\_vpc\_secondary\_ranges) | List of secondary ranges | <pre>list(object({<br/>    range_name    = string<br/>    ip_cidr_range = string<br/>  }))</pre> | n/a | yes |
 | <a name="input_private_subnet_cidr"></a> [private\_subnet\_cidr](#input\_private\_subnet\_cidr) | CIDR range for private subnet | `string` | `""` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Project ID in which clusters are deployed | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Region to deploy your cluster in | `string` | n/a | yes |
 | <a name="input_routing_mode"></a> [routing\_mode](#input\_routing\_mode) | Routing mode for the network | `string` | `"GLOBAL"` | no |
 | <a name="input_shared_vpc"></a> [shared\_vpc](#input\_shared\_vpc) | If true, the shim network is a shared VPC | `bool` | `false` | no |
-| <a name="input_shared_vpc_host_project"></a> [shared\_vpc\_host\_project](#input\_shared\_vpc\_host\_project) | Shared VPC: Project ID of the host project | `string` | `""` | no |
-| <a name="input_shared_vpc_network_name"></a> [shared\_vpc\_network\_name](#input\_shared\_vpc\_network\_name) | Shared VPC: Network name | `string` | `""` | no |
-| <a name="input_shared_vpc_subnet_name"></a> [shared\_vpc\_subnet\_name](#input\_shared\_vpc\_subnet\_name) | Shared VPC: Subnet name | `string` | `""` | no |
+| <a name="input_shared_vpc_host_project"></a> [shared\_vpc\_host\_project](#input\_shared\_vpc\_host\_project) | Shared VPC: Project ID of the host project. Should be supplied if shared\_vpc is true. | `string` | `""` | no |
+| <a name="input_shared_vpc_network_name"></a> [shared\_vpc\_network\_name](#input\_shared\_vpc\_network\_name) | Shared VPC: Network name. Should be supplied if shared\_vpc is true. | `string` | `""` | no |
+| <a name="input_shared_vpc_subnet_name"></a> [shared\_vpc\_subnet\_name](#input\_shared\_vpc\_subnet\_name) | Shared VPC: Subnet name. Should be supplied if shared\_vpc is true. | `string` | `""` | no |
 | <a name="input_shim"></a> [shim](#input\_shim) | If true will not create the network and forward the input values to the same outputs. | `bool` | `false` | no |
-| <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | SHIM: Subnetwork ID | `string` | n/a | yes |
+| <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | SHIM: Subnetwork ID. Should be supplied if shim is true. | `string` | `""` | no |
 
 ## Outputs
 
