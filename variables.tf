@@ -80,6 +80,7 @@ variable "routing_mode" {
 variable "private_subnet_cidr" {
   description = "CIDR range for private subnet"
   type        = string
+  default     = ""
 }
 variable "network_vpc_secondary_ranges" {
   description = "List of secondary ranges"
