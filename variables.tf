@@ -23,14 +23,9 @@ variable "cluster_name" {
 ################################################################################
 # Network
 ################################################################################
-variable "shim" {
-  description = "If true will not create the network and forward the input values to the same outputs."
-  type        = bool
-  default     = false
-}
 
-variable "shared_vpc" {
-  description = "If true, the shim network is a shared VPC"
+variable "use_existing_network" {
+  description = "If true will not create the network and forward the input values to the same outputs."
   type        = bool
   default     = false
 }
@@ -38,39 +33,18 @@ variable "shared_vpc" {
 ################################################################################
 # Network SHIM
 ################################################################################
-variable "network_name" {
-  description = "SHIM: network name. Should be supplied if shim is true."
+variable "network_id" {
+  description = "ID of the existing network. Only used when use_existing_network is set to true"
   type        = string
   default     = ""
 }
 
 variable "subnet_id" {
-  description = "SHIM: Subnetwork ID. Should be supplied if shim is true."
+  description = "ID of the existing subnet. Only used when use_existing_network is set to true"
   type        = string
   default     = ""
 }
 
-################################################################################
-# Shared VPC
-################################################################################
-
-variable "shared_vpc_host_project" {
-  description = "Shared VPC: Project ID of the host project. Should be supplied if shared_vpc is true."
-  type        = string
-  default     = ""
-}
-
-variable "shared_vpc_network_name" {
-  description = "Shared VPC: Network name. Should be supplied if shared_vpc is true."
-  type        = string
-  default     = ""
-}
-
-variable "shared_vpc_subnet_name" {
-  description = "Shared VPC: Subnet name. Should be supplied if shared_vpc is true."
-  type        = string
-  default     = ""
-}
 ################################################################################
 # Network NON-SHIM
 ################################################################################
