@@ -7,7 +7,7 @@ Truefoundry Google Cloud Network Module
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.4 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | ~> 6.0 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | ~> 6.21 |
 | <a name="requirement_time"></a> [time](#requirement\_time) | ~> 0.12 |
 
 ## Providers
