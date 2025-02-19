@@ -21,7 +21,7 @@ Truefoundry Google Cloud Network Module
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_cloud_router"></a> [cloud\_router](#module\_cloud\_router) | terraform-google-modules/cloud-router/google | 6.2.0 |
-| <a name="module_network"></a> [network](#module\_network) | terraform-google-modules/network/google | 9.3.0 |
+| <a name="module_network"></a> [network](#module\_network) | terraform-google-modules/network/google | 10.0.0 |
 
 ## Resources
 
