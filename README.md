@@ -37,6 +37,7 @@ Truefoundry Google Cloud Network Module
 | <a name="input_enable_flow_logs"></a> [enable\_flow\_logs](#input\_enable\_flow\_logs) | Enable flow logs for subnets | `bool` | `false` | no |
 | <a name="input_enable_private_access"></a> [enable\_private\_access](#input\_enable\_private\_access) | Private access for subnets | `bool` | `true` | no |
 | <a name="input_network_id"></a> [network\_id](#input\_network\_id) | ID of the existing network. Only used when use\_existing\_network is set to true | `string` | `""` | no |
+| <a name="input_network_profile"></a> [network\_profile](#input\_network\_profile) | "A full or partial URL of the network profile to apply to this network.<br/>This field can be set only at resource creation time. For example, the<br/>following are valid URLs:<br/>  * https://www.googleapis.com/compute/beta/projects/{projectId}/global/networkProfiles/{network_profile_name}<br/>  * projects/{projectId}/global/networkProfiles/{network\_profile\_name} | `string` | `null` | no |
 | <a name="input_network_vpc_secondary_ranges"></a> [network\_vpc\_secondary\_ranges](#input\_network\_vpc\_secondary\_ranges) | List of secondary ranges | <pre>list(object({<br/>    range_name    = string<br/>    ip_cidr_range = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_private_subnet_cidr"></a> [private\_subnet\_cidr](#input\_private\_subnet\_cidr) | CIDR range for private subnet | `string` | `""` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Project ID in which clusters are deployed | `string` | n/a | yes |
