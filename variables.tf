@@ -14,6 +14,17 @@ variable "cluster_name" {
   description = "Name of the cluster"
   type        = string
 }
+variable "network_profile" {
+  type        = string
+  default     = null
+  description = <<-EOT
+    "A full or partial URL of the network profile to apply to this network.
+    This field can be set only at resource creation time. For example, the
+    following are valid URLs:
+      * https://www.googleapis.com/compute/beta/projects/{projectId}/global/networkProfiles/{network_profile_name}
+      * projects/{projectId}/global/networkProfiles/{network_profile_name}
+    EOT
+}
 # variable "tags" {
 #   description = "A map of tags to add to all resources"
 #   type        = map(string)

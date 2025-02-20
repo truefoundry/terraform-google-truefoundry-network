@@ -9,6 +9,7 @@ module "network" {
   network_name            = local.network_name
   routing_mode            = var.routing_mode
   auto_create_subnetworks = false
+  network_profile         = var.network_profile
 
   subnets = [
     {
