@@ -3,12 +3,13 @@
 module "network" {
   count                   = var.use_existing_network ? 0 : 1
   source                  = "terraform-google-modules/network/google"
-  version                 = "9.3.0"
+  version                 = "10.0.0"
   description             = "Truefoundry network for ${var.cluster_name}"
   project_id              = var.project_id
   network_name            = local.network_name
   routing_mode            = var.routing_mode
   auto_create_subnetworks = false
+  network_profile         = var.network_profile
 
   subnets = [
     {
