@@ -94,7 +94,8 @@ module "cloud_router" {
   nats = [
     {
       name                               = local.nat_name
-      nat_ip_allocate_option             = "AUTO_ONLY"
+      nat_ip_allocate_option             = var.use_existing_nat_ips ? "MANUAL_ONLY" : "AUTO_ONLY"
+      nat_ips = var.use_existing_nat_ips ? var.existing_nat_ips : []
       source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
       subnetworks = [
         {

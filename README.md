@@ -36,6 +36,7 @@ Truefoundry Google Cloud Network Module
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the cluster | `string` | n/a | yes |
 | <a name="input_enable_flow_logs"></a> [enable\_flow\_logs](#input\_enable\_flow\_logs) | Enable flow logs for subnets | `bool` | `false` | no |
 | <a name="input_enable_private_access"></a> [enable\_private\_access](#input\_enable\_private\_access) | Private access for subnets | `bool` | `true` | no |
+| <a name="input_existing_nat_ips"></a> [existing\_nat\_ips](#input\_existing\_nat\_ips) | List of existing NAT IPs. Only used when use\_existing\_nat\_ips is set to true | `list(string)` | `[]` | no |
 | <a name="input_network_id"></a> [network\_id](#input\_network\_id) | ID of the existing network. Only used when use\_existing\_network is set to true | `string` | `""` | no |
 | <a name="input_network_profile"></a> [network\_profile](#input\_network\_profile) | "A full or partial URL of the network profile to apply to this network.<br/>This field can be set only at resource creation time. For example, the<br/>following are valid URLs:<br/>  * https://www.googleapis.com/compute/beta/projects/{projectId}/global/networkProfiles/{network_profile_name}<br/>  * projects/{projectId}/global/networkProfiles/{network\_profile\_name} | `string` | `null` | no |
 | <a name="input_network_vpc_secondary_ranges"></a> [network\_vpc\_secondary\_ranges](#input\_network\_vpc\_secondary\_ranges) | List of secondary ranges | <pre>list(object({<br/>    range_name    = string<br/>    ip_cidr_range = string<br/>  }))</pre> | `[]` | no |
@@ -44,6 +45,7 @@ Truefoundry Google Cloud Network Module
 | <a name="input_region"></a> [region](#input\_region) | Region to deploy your cluster in | `string` | n/a | yes |
 | <a name="input_routing_mode"></a> [routing\_mode](#input\_routing\_mode) | Routing mode for the network | `string` | `"GLOBAL"` | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | ID of the existing subnet. Only used when use\_existing\_network is set to true | `string` | `""` | no |
+| <a name="input_use_existing_nat_ips"></a> [use\_existing\_nat\_ips](#input\_use\_existing\_nat\_ips) | If true will not create the NAT IPs and forward the existing\_nat\_ips variable values to the NAT IPs field. | `bool` | `false` | no |
 | <a name="input_use_existing_network"></a> [use\_existing\_network](#input\_use\_existing\_network) | If true will not create the network and forward the input values to the same outputs. | `bool` | `false` | no |
 
 ## Outputs
