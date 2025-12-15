@@ -60,6 +60,16 @@ variable "subnet_id" {
 # Network NON-SHIM
 ################################################################################
 
+variable "use_existing_nat_ips" {
+  description = "If true will not create the NAT IPs and forward the existing_nat_ips variable values to the NAT IPs field."
+  type        = bool
+  default     = false
+}
+variable "existing_nat_ips" {
+  description = "List of existing NAT IPs. Only used when use_existing_nat_ips is set to true"
+  type        = list(string)
+  default     = []
+}
 variable "routing_mode" {
   description = "Routing mode for the network"
   type        = string
